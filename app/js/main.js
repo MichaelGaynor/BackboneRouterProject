@@ -176,8 +176,6 @@ var Router = _backbone2['default'].Router.extend({
   },
 
   showContact: function showContact(contactId) {
-    var _this = this;
-
     // this.contacts.fetch().then(function(){
 
     //      this.$el.html(contactTemplate(this.contacts.toJSON()));
@@ -185,17 +183,11 @@ var Router = _backbone2['default'].Router.extend({
 
     var contact = this.contacts.get(contactId);
 
-    if (contact) {
-      this.$el.html((0, _viewsContact2['default'])(contact.toJSON));
-    } else {
-      (function () {
-        contact = _this.contacts.add({ objectId: contactId });
-        var router = _this;
-        contact.fetch().then(function () {
-          router.$el.html((0, _viewsContact2['default'])(contact.toJSON()));
-        });
-      })();
-    }
+    contact = this.contacts.add({ objectId: contactId });
+    var router = this;
+    contact.fetch().then(function () {
+      router.$el.html((0, _viewsContact2['default'])(contact.toJSON()));
+    });
   },
 
   start: function start() {

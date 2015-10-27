@@ -55,15 +55,11 @@ let Router = Backbone.Router.extend({
 
     let contact = this.contacts.get(contactId);
 
-    if(contact){
-      this.$el.html(contactTemplate(contact.toJSON));
-    } else {
-      contact = this.contacts.add({objectId: contactId});
-      let router = this;
-      contact.fetch().then(function(){
-        router.$el.html( contactTemplate( contact.toJSON() ));
-      })
-    }
+    contact = this.contacts.add({objectId: contactId});
+    let router = this;
+    contact.fetch().then(function(){
+      router.$el.html( contactTemplate( contact.toJSON() ));
+    })
   },
 
   start: function(){
