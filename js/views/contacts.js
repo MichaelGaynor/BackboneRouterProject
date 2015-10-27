@@ -3,7 +3,7 @@
 function processData(data) {
   return data.map(function(item) {
     return `
-    <li>${item.Name}</li>
+    <li class="contactListItem" data-contact-id="${item.objectId}">${item.Name}</li>
     `
   }).join('');
 }

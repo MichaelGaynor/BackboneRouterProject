@@ -1,32 +1,37 @@
 import Backbone from 'backbone';
+import $ from 'jquery';
 
 import ContactsCollection from './ContactsCollection';
 
-import homeTemplate from './views/home';
+import contactTemplate from './views/contact';
 import contactsTemplate from './views/contacts';
 
 
 let Router = Backbone.Router.extend({
 
   routes: {
-    ""      : "home",
-    "contacts" : "showContacts",
-    "contacts/:Mark" : "showContactMark",
+    ""                   : "showContacts",
+    "contacts/:objectId" : "showContact",
 
   }, 
 
   initialize: function(appElement){
     this.$el = appElement;
     this.contacts = new ContactsCollection();
+
+    let router = this;
+
+    this.$el.on('click', '.contactListItem', function(event) {
+      let $li = $(event.currentTarget);
+      var contactId = $li.data('contact-id');
+      console.log('show contactID', contactId);
+      router.navigate(`contacts/${contactId}`);
+      router.showContact(contactId);
+    });
   },
 
-  home: function(){
-    console.log('show home page');
-    this.$el.html(homeTemplate());
-  },
 
   showContacts: function(){
-    console.log('show contacts page');
 
    this.contacts.fetch().then(function(){
 
@@ -34,9 +39,24 @@ let Router = Backbone.Router.extend({
    }.bind(this));
   },
 
-  showAbout: function(){
-    console.log('show about page');
-    this.$el.html('I already said it was coming soon');
+  showContact: function(contactId){
+   // this.contacts.fetch().then(function(){
+
+   //      this.$el.html(contactTemplate(this.contacts.toJSON()));
+   // }.bind(this));
+
+    let contact = this.contacts.get(contactId);
+    console.log(contact);
+
+    if(contact){
+      this.$el.html(contactTemplate(contact.toJSON));
+    } else {
+      contact = this.contacts.add({objectId: contactId});
+      let router = this;
+      contact.fetch().then(function(){
+        router.$el.html( contactTemplate( contact.toJSON() ));
+      })
+    }
   },
 
   start: function(){

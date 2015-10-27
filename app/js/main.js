@@ -92,13 +92,17 @@ var _backbone = require('backbone');
 
 var _backbone2 = _interopRequireDefault(_backbone);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var _ContactsCollection = require('./ContactsCollection');
 
 var _ContactsCollection2 = _interopRequireDefault(_ContactsCollection);
 
-var _viewsHome = require('./views/home');
+var _viewsContact = require('./views/contact');
 
-var _viewsHome2 = _interopRequireDefault(_viewsHome);
+var _viewsContact2 = _interopRequireDefault(_viewsContact);
 
 var _viewsContacts = require('./views/contacts');
 
@@ -107,24 +111,27 @@ var _viewsContacts2 = _interopRequireDefault(_viewsContacts);
 var Router = _backbone2['default'].Router.extend({
 
   routes: {
-    "": "home",
-    "contacts": "showContacts",
-    "contacts/:Mark": "showContactMark"
+    "": "showContacts",
+    "contacts/:objectId": "showContact"
 
   },
 
   initialize: function initialize(appElement) {
     this.$el = appElement;
     this.contacts = new _ContactsCollection2['default']();
-  },
 
-  home: function home() {
-    console.log('show home page');
-    this.$el.html((0, _viewsHome2['default'])());
+    var router = this;
+
+    this.$el.on('click', '.contactListItem', function (event) {
+      var $li = (0, _jquery2['default'])(event.currentTarget);
+      var contactId = $li.data('contact-id');
+      console.log('show contactID', contactId);
+      router.navigate('contacts/' + contactId);
+      router.showContact(contactId);
+    });
   },
 
   showContacts: function showContacts() {
-    console.log('show contacts page');
 
     this.contacts.fetch().then((function () {
 
@@ -132,9 +139,28 @@ var Router = _backbone2['default'].Router.extend({
     }).bind(this));
   },
 
-  showAbout: function showAbout() {
-    console.log('show about page');
-    this.$el.html('I already said it was coming soon');
+  showContact: function showContact(contactId) {
+    var _this = this;
+
+    // this.contacts.fetch().then(function(){
+
+    //      this.$el.html(contactTemplate(this.contacts.toJSON()));
+    // }.bind(this));
+
+    var contact = this.contacts.get(contactId);
+    console.log(contact);
+
+    if (contact) {
+      this.$el.html((0, _viewsContact2['default'])(contact.toJSON));
+    } else {
+      (function () {
+        contact = _this.contacts.add({ objectId: contactId });
+        var router = _this;
+        contact.fetch().then(function () {
+          router.$el.html((0, _viewsContact2['default'])(contact.toJSON()));
+        });
+      })();
+    }
   },
 
   start: function start() {
@@ -146,7 +172,20 @@ var Router = _backbone2['default'].Router.extend({
 exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./ContactsCollection":1,"./views/contacts":5,"./views/home":6,"backbone":7}],5:[function(require,module,exports){
+},{"./ContactsCollection":1,"./views/contact":5,"./views/contacts":6,"backbone":7,"jquery":8}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function contactTemplate(data) {
+  return "\n    <h2>" + data.Name + "</h2>\n    <h3>" + data.PhoneNumber + "</h2>\n    <h3>" + data.Email + "</h2>\n    <h3>" + data.Location + "</h2>\n    ";
+}
+
+exports["default"] = contactTemplate;
+module.exports = exports["default"];
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -155,7 +194,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function processData(data) {
   return data.map(function (item) {
-    return '\n    <li>' + item.Name + '</li>\n    ';
+    return '\n    <li class="contactListItem" data-contact-id="' + item.objectId + '">' + item.Name + '</li>\n    ';
   }).join('');
 }
 
@@ -165,19 +204,6 @@ function contactsTemplate(data) {
 
 exports['default'] = contactsTemplate;
 module.exports = exports['default'];
-
-},{}],6:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-function homeTemplate() {
-  return "\n    <h2>Home Page </h2>";
-}
-
-exports["default"] = homeTemplate;
-module.exports = exports["default"];
 
 },{}],7:[function(require,module,exports){
 (function (global){

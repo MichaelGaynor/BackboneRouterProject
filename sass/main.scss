@@ -2,7 +2,7 @@
 @import "font-awesome";
 
 body {
-  background: white;
+  background: #A1E402;
 }
 
 h2{
@@ -11,12 +11,31 @@ h2{
 
 li{
   list-style-type: none;
+  width: 80%;
   border: 1px solid #A1E402;
   border-radius: 25px;
-  background-color: #A1E402;
+  background-color: magenta;
   color: white;
   padding: 5px 0;
   margin: 5px 0;
+}
+
+ul{
+margin-left: 10%;
+margin-right: 10%;
+display: block;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+div.app{
+  border: none;
+  padding: 0;
+  background-color: #A1E402;
+  margin-top: 50px;
 }
 
 div{
@@ -24,4 +43,7 @@ div{
   margin-left: 20%;
   margin-right: 20%;
   text-align: center;
+  border: 1px solid #A1E402;
+  border-radius: 250px;
+  background-color: white;
 }
