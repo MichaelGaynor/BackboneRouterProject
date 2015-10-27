@@ -2022,12 +2022,17 @@ body {
   background: #A1E402; }
 
 h2 {
-  text-align: center; }
+  text-align: center;
+  color: #444442; }
+
+h3 {
+  text-align: center;
+  color: #444442; }
 
 li {
   list-style-type: none;
   width: 80%;
-  border: 1px solid #A1E402;
+  border: 1px solid white;
   border-radius: 25px;
   background-color: magenta;
   color: white;
@@ -2054,7 +2059,7 @@ div {
   margin-left: 20%;
   margin-right: 20%;
   text-align: center;
-  border: 1px solid #A1E402;
+  border: 1px solid white;
   border-radius: 250px;
   background-color: white; }
 

@@ -11,9 +11,35 @@ var _backbone = require('backbone');
 
 var _backbone2 = _interopRequireDefault(_backbone);
 
+var ContactModel = _backbone2['default'].Model.extend({
+  urlRoot: 'https://api.parse.com/1/classes/Contacts',
+  idAttribute: 'objectId'
+});
+
+exports['default'] = ContactModel;
+module.exports = exports['default'];
+
+},{"backbone":8}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
+
+var _ContactModel = require('./ContactModel');
+
+var _ContactModel2 = _interopRequireDefault(_ContactModel);
+
 var ContactsCollection = _backbone2['default'].Collection.extend({
 
   url: 'https://api.parse.com/1/classes/Contacts',
+  model: _ContactModel2['default'],
 
   parse: function parse(data) {
     return data.results;
@@ -24,7 +50,7 @@ var ContactsCollection = _backbone2['default'].Collection.extend({
 exports['default'] = ContactsCollection;
 module.exports = exports['default'];
 
-},{"backbone":7}],2:[function(require,module,exports){
+},{"./ContactModel":1,"backbone":8}],3:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -43,7 +69,7 @@ _jquery2['default'].ajaxSetup({
   }
 });
 
-},{"jquery":8}],3:[function(require,module,exports){
+},{"jquery":9}],4:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -79,7 +105,7 @@ window.router = router;
 
 console.log('Howdy, ya World you');
 
-},{"./ContactsCollection":1,"./ajax_setup":2,"./router":4,"jquery":8,"moment":9,"underscore":10}],4:[function(require,module,exports){
+},{"./ContactsCollection":2,"./ajax_setup":3,"./router":5,"jquery":9,"moment":10,"underscore":11}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107,6 +133,10 @@ var _viewsContact2 = _interopRequireDefault(_viewsContact);
 var _viewsContacts = require('./views/contacts');
 
 var _viewsContacts2 = _interopRequireDefault(_viewsContacts);
+
+var _ContactModel = require('./ContactModel');
+
+var _ContactModel2 = _interopRequireDefault(_ContactModel);
 
 var Router = _backbone2['default'].Router.extend({
 
@@ -147,6 +177,10 @@ var Router = _backbone2['default'].Router.extend({
     //      this.$el.html(contactTemplate(this.contacts.toJSON()));
     // }.bind(this));
 
+    console.log(contactId);
+
+    console.log(this.contacts);
+
     var contact = this.contacts.get(contactId);
     console.log(contact);
 
@@ -172,20 +206,20 @@ var Router = _backbone2['default'].Router.extend({
 exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./ContactsCollection":1,"./views/contact":5,"./views/contacts":6,"backbone":7,"jquery":8}],5:[function(require,module,exports){
+},{"./ContactModel":1,"./ContactsCollection":2,"./views/contact":6,"./views/contacts":7,"backbone":8,"jquery":9}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function contactTemplate(data) {
-  return "\n    <h2>" + data.Name + "</h2>\n    <h3>" + data.PhoneNumber + "</h2>\n    <h3>" + data.Email + "</h2>\n    <h3>" + data.Location + "</h2>\n    ";
+  return "\n    <div>\n    <h2>" + data.Name + "</h2>\n    <h3>" + data.PhoneNumber + "</h2>\n    <h3>" + data.Email + "</h2>\n    <h3>" + data.Location + "</h2>\n    </div>\n    ";
 }
 
 exports["default"] = contactTemplate;
 module.exports = exports["default"];
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -205,7 +239,7 @@ function contactsTemplate(data) {
 exports['default'] = contactsTemplate;
 module.exports = exports['default'];
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
@@ -2104,7 +2138,7 @@ module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":8,"underscore":10}],8:[function(require,module,exports){
+},{"jquery":9,"underscore":11}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -11316,7 +11350,7 @@ return jQuery;
 
 }));
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -14512,7 +14546,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -16062,7 +16096,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[3])
+},{}]},{},[4])
 
 
 //# sourceMappingURL=main.js.map

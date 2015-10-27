@@ -6,6 +6,7 @@ import ContactsCollection from './ContactsCollection';
 import contactTemplate from './views/contact';
 import contactsTemplate from './views/contacts';
 
+import ContactModel from './ContactModel';
 
 let Router = Backbone.Router.extend({
 
@@ -44,6 +45,10 @@ let Router = Backbone.Router.extend({
 
    //      this.$el.html(contactTemplate(this.contacts.toJSON()));
    // }.bind(this));
+
+  console.log(contactId);
+
+  console.log(this.contacts);
 
     let contact = this.contacts.get(contactId);
     console.log(contact);
