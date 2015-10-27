@@ -2029,6 +2029,16 @@ h3 {
   text-align: center;
   color: #444442; }
 
+h3.Contacts {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  color: white;
+  background-color: magenta;
+  border: 1px solid magenta;
+  border-radius: 25px;
+  width: 200px; }
+
 li {
   list-style-type: none;
   width: 80%;

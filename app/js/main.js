@@ -159,6 +159,12 @@ var Router = _backbone2['default'].Router.extend({
       router.navigate('contacts/' + contactId);
       router.showContact(contactId);
     });
+
+    this.$el.on('click', '.Contacts', function (event) {
+      var $li = (0, _jquery2['default'])(event.currentTarget);
+      router.navigate('');
+      router.showContacts();
+    });
   },
 
   showContacts: function showContacts() {
@@ -177,12 +183,7 @@ var Router = _backbone2['default'].Router.extend({
     //      this.$el.html(contactTemplate(this.contacts.toJSON()));
     // }.bind(this));
 
-    console.log(contactId);
-
-    console.log(this.contacts);
-
     var contact = this.contacts.get(contactId);
-    console.log(contact);
 
     if (contact) {
       this.$el.html((0, _viewsContact2['default'])(contact.toJSON));
@@ -213,7 +214,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function contactTemplate(data) {
-  return "\n    <div>\n    <h2>" + data.Name + "</h2>\n    <h3>" + data.PhoneNumber + "</h2>\n    <h3>" + data.Email + "</h2>\n    <h3>" + data.Location + "</h2>\n    </div>\n    ";
+  return "\n    <div>\n    <h2>" + data.Name + "</h2>\n    <h3>" + data.PhoneNumber + "</h3>\n    <h3>" + data.Email + "</h3>\n    <h3>" + data.Location + "</h3>\n\n    </div>\n    <h3 class=\"Contacts\">Contacts</h3>\n    ";
 }
 
 exports["default"] = contactTemplate;
