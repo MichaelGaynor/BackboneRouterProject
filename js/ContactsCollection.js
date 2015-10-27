@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 
-let TodosCollection = Backbone.Collection.extend({
+let ContactsCollection = Backbone.Collection.extend({
 
   url: 'https://api.parse.com/1/classes/Contacts',
 
@@ -10,4 +10,4 @@ let TodosCollection = Backbone.Collection.extend({
 
 })
 
-export default TodosCollection;
+export default ContactsCollection;

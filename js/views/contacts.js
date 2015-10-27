@@ -3,16 +3,18 @@
 function processData(data) {
   return data.map(function(item) {
     return `
-    <li>${item.title}</li>
+    <li>${item.Name}</li>
     `
   }).join('');
 }
 
-function todosTemplate(data) {
+function contactsTemplate(data) {
   return `
-    <h2>Something Todo</h2>
+    <div>
+    <h2>My Contacts</h2>
     <ul>${processData(data)}</ul>
+    </div>
     `;
 }
 
-export default todosTemplate;
+export default contactsTemplate;

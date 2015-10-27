@@ -2019,6 +2019,24 @@
   content: ""; }
 
 body {
-  background: #e2ebf3; }
+  background: white; }
+
+h2 {
+  text-align: center; }
+
+li {
+  list-style-type: none;
+  border: 1px solid #A1E402;
+  border-radius: 25px;
+  background-color: #A1E402;
+  color: white;
+  padding: 5px 0;
+  margin: 5px 0; }
+
+div {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */

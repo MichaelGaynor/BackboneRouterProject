@@ -1,23 +1,23 @@
 import Backbone from 'backbone';
 
-import TodosCollection from './todosCollection';
+import ContactsCollection from './ContactsCollection';
 
 import homeTemplate from './views/home';
-import todosTemplate from './views/todos';
+import contactsTemplate from './views/contacts';
 
 
 let Router = Backbone.Router.extend({
 
   routes: {
     ""      : "home",
-    "todos" : "showTodos",
-    "todos/:id" : "showIndividualTodo",
-    "about" : "showAbout"
+    "contacts" : "showContacts",
+    "contacts/:Mark" : "showContactMark",
+
   }, 
 
   initialize: function(appElement){
     this.$el = appElement;
-    this.todos = new TodosCollection();
+    this.contacts = new ContactsCollection();
   },
 
   home: function(){
@@ -25,17 +25,13 @@ let Router = Backbone.Router.extend({
     this.$el.html(homeTemplate());
   },
 
-  showTodos: function(){
-    console.log('show todo page');
+  showContacts: function(){
+    console.log('show contacts page');
 
-   this.todos.fetch().then(function(){
+   this.contacts.fetch().then(function(){
 
-        this.$el.html(todosTemplate(this.todos.toJSON()));
+        this.$el.html(contactsTemplate(this.contacts.toJSON()));
    }.bind(this));
-  },
-
-  showIndividualTodo: function(){
-    console.log('Individual')
   },
 
   showAbout: function(){

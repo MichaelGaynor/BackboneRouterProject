@@ -5,8 +5,7 @@ import Router from './router';
 
 import './ajax_setup';
 
-import TodosCollection from './todosCollection';
-// window.TodosCollection = TodosCollection;
+import ContactsCollection from './ContactsCollection';
 
 var appElement = $('.app');
 

@@ -1,14 +1,40 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
+
+var ContactsCollection = _backbone2['default'].Collection.extend({
+
+  url: 'https://api.parse.com/1/classes/Contacts',
+
+  parse: function parse(data) {
+    return data.results;
+  }
+
+});
+
+exports['default'] = ContactsCollection;
+module.exports = exports['default'];
+
+},{"backbone":7}],2:[function(require,module,exports){
+'use strict';
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var APP_ID = 'mmoMgOQzCeRE8Ad4vmRkHMLYyTwEPPrAGXMEfDFm';
-var API_KEY = 'xvocUSdI55mrUV7m7fb0ylyXO2kQ6EML2mlBDEoY';
+var APP_ID = 'UlWlMwzGZkF2edx0N6WeRZz1rVcQRnXGhjK6OtWo';
+var API_KEY = '25lqcMABfqdJ9AYp6bTR69sQ1ItsjroJ5n6Cj0R0';
 
 _jquery2['default'].ajaxSetup({
   headers: {
@@ -17,7 +43,7 @@ _jquery2['default'].ajaxSetup({
   }
 });
 
-},{"jquery":8}],2:[function(require,module,exports){
+},{"jquery":8}],3:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -40,11 +66,9 @@ var _router2 = _interopRequireDefault(_router);
 
 require('./ajax_setup');
 
-var _todosCollection = require('./todosCollection');
+var _ContactsCollection = require('./ContactsCollection');
 
-var _todosCollection2 = _interopRequireDefault(_todosCollection);
-
-// window.TodosCollection = TodosCollection;
+var _ContactsCollection2 = _interopRequireDefault(_ContactsCollection);
 
 var appElement = (0, _jquery2['default'])('.app');
 
@@ -55,7 +79,7 @@ window.router = router;
 
 console.log('Howdy, ya World you');
 
-},{"./ajax_setup":1,"./router":3,"./todosCollection":4,"jquery":8,"moment":9,"underscore":10}],3:[function(require,module,exports){
+},{"./ContactsCollection":1,"./ajax_setup":2,"./router":4,"jquery":8,"moment":9,"underscore":10}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -68,30 +92,30 @@ var _backbone = require('backbone');
 
 var _backbone2 = _interopRequireDefault(_backbone);
 
-var _todosCollection = require('./todosCollection');
+var _ContactsCollection = require('./ContactsCollection');
 
-var _todosCollection2 = _interopRequireDefault(_todosCollection);
+var _ContactsCollection2 = _interopRequireDefault(_ContactsCollection);
 
 var _viewsHome = require('./views/home');
 
 var _viewsHome2 = _interopRequireDefault(_viewsHome);
 
-var _viewsTodos = require('./views/todos');
+var _viewsContacts = require('./views/contacts');
 
-var _viewsTodos2 = _interopRequireDefault(_viewsTodos);
+var _viewsContacts2 = _interopRequireDefault(_viewsContacts);
 
 var Router = _backbone2['default'].Router.extend({
 
   routes: {
     "": "home",
-    "todos": "showTodos",
-    "todos/:id": "showIndividualTodo",
-    "about": "showAbout"
+    "contacts": "showContacts",
+    "contacts/:Mark": "showContactMark"
+
   },
 
   initialize: function initialize(appElement) {
     this.$el = appElement;
-    this.todos = new _todosCollection2['default']();
+    this.contacts = new _ContactsCollection2['default']();
   },
 
   home: function home() {
@@ -99,17 +123,13 @@ var Router = _backbone2['default'].Router.extend({
     this.$el.html((0, _viewsHome2['default'])());
   },
 
-  showTodos: function showTodos() {
-    console.log('show todo page');
+  showContacts: function showContacts() {
+    console.log('show contacts page');
 
-    this.todos.fetch().then((function () {
+    this.contacts.fetch().then((function () {
 
-      this.$el.html((0, _viewsTodos2['default'])(this.todos.toJSON()));
+      this.$el.html((0, _viewsContacts2['default'])(this.contacts.toJSON()));
     }).bind(this));
-  },
-
-  showIndividualTodo: function showIndividualTodo() {
-    console.log('Individual');
   },
 
   showAbout: function showAbout() {
@@ -126,33 +146,27 @@ var Router = _backbone2['default'].Router.extend({
 exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./todosCollection":4,"./views/home":5,"./views/todos":6,"backbone":7}],4:[function(require,module,exports){
+},{"./ContactsCollection":1,"./views/contacts":5,"./views/home":6,"backbone":7}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function processData(data) {
+  return data.map(function (item) {
+    return '\n    <li>' + item.Name + '</li>\n    ';
+  }).join('');
+}
 
-var _backbone = require('backbone');
+function contactsTemplate(data) {
+  return '\n    <div>\n    <h2>My Contacts</h2>\n    <ul>' + processData(data) + '</ul>\n    </div>\n    ';
+}
 
-var _backbone2 = _interopRequireDefault(_backbone);
-
-var TodosCollection = _backbone2['default'].Collection.extend({
-
-  url: 'https://api.parse.com/1/classes/Contacts',
-
-  parse: function parse(data) {
-    return data.results;
-  }
-
-});
-
-exports['default'] = TodosCollection;
+exports['default'] = contactsTemplate;
 module.exports = exports['default'];
 
-},{"backbone":7}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -164,26 +178,6 @@ function homeTemplate() {
 
 exports["default"] = homeTemplate;
 module.exports = exports["default"];
-
-},{}],6:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function processData(data) {
-  return data.map(function (item) {
-    return '\n    <li>' + item.title + '</li>\n    ';
-  }).join('');
-}
-
-function todosTemplate(data) {
-  return '\n    <h2>Something Todo</h2>\n    <ul>' + processData(data) + '</ul>\n    ';
-}
-
-exports['default'] = todosTemplate;
-module.exports = exports['default'];
 
 },{}],7:[function(require,module,exports){
 (function (global){
@@ -16042,7 +16036,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[2])
+},{}]},{},[3])
 
 
 //# sourceMappingURL=main.js.map
