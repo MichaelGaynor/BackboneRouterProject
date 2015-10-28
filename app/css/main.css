@@ -2038,7 +2038,8 @@ h3.Contacts {
   border: 0 solid magenta;
   border-radius: 25px;
   width: 200px;
-  cursor: pointer; }
+  cursor: pointer;
+  padding: 5px 0; }
 
 h3.Contacts:active {
   background-color: white;
@@ -2053,7 +2054,8 @@ h3.addContact {
   border: 0 solid magenta;
   border-radius: 25px;
   width: 200px;
-  cursor: pointer; }
+  cursor: pointer;
+  padding: 5px 0; }
 
 h3.addContact:active {
   background-color: magenta;

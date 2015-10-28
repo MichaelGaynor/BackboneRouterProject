@@ -221,7 +221,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function AddContact(data) {
-  return "\n  <div>\n  <h2>Enter Info</h2>\n  <form>\n  Name:<br>\n  <input type=\"text\" name=\"Name\">\n  <br>Phone:<br>\n  <input type=\"text\" name=\"Phone\">\n  <br>Email:<br>\n  <input type=\"text\" name=\"Email\">\n  <br>Location:<br>\n  <input type=\"text\" name=\"Location\">\n  <br>\n  </form>\n  <h2>Do it, now</h2>\n  <button class=\"submit\">Submit</button>\n  </div>\n    <h3 class=\"Contacts\">Contacts</h3>\n\n  ";
+  return "\n  <div>\n  <h2>Enter Info</h2>\n  <form>\n  Name:<br>\n  <input type=\"text\" class=\"Name\">\n  <br>Phone:<br>\n  <input type=\"text\" class=\"Phone\">\n  <br>Email:<br>\n  <input type=\"text\" class=\"Email\">\n  <br>Location:<br>\n  <input type=\"text\" class=\"Location\">\n  <br>\n  </form>\n  <h2>Do it, now</h2>\n  <button class=\"submit\">Submit</button>\n  </div>\n    <h3 class=\"Contacts\">Contacts</h3>\n\n  ";
 }
 
 exports["default"] = AddContact;
