@@ -14,6 +14,7 @@ function contactsTemplate(data) {
     <h2>My Contacts</h2>
     <ul>${processData(data)}</ul>
     </div>
+    <h3 class="addContact">Add Contact</h3>
     `;
 }
 

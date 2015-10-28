@@ -2039,6 +2039,29 @@ h3.Contacts {
   border-radius: 25px;
   width: 200px; }
 
+h3.addContact {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  color: #444442;
+  background-color: white;
+  border: 0 solid magenta;
+  border-radius: 25px;
+  width: 200px; }
+
+form {
+  color: #444442; }
+
+input {
+  border-radius: 25px;
+  border: 1px solid magenta; }
+
+.submit {
+  color: white;
+  background-color: magenta;
+  border: none;
+  border-radius: 25px; }
+
 li {
   list-style-type: none;
   width: 80%;

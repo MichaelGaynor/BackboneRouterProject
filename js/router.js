@@ -5,6 +5,7 @@ import ContactsCollection from './ContactsCollection';
 
 import contactTemplate from './views/contact';
 import contactsTemplate from './views/contacts';
+import AddContact from './views/AddContact';
 
 import ContactModel from './ContactModel';
 
@@ -13,6 +14,7 @@ let Router = Backbone.Router.extend({
   routes: {
     ""                   : "showContacts",
     "contacts/:objectId" : "showContact",
+    "AddContact"         : "showAddContact"
 
   }, 
 
@@ -34,7 +36,13 @@ let Router = Backbone.Router.extend({
       let $li = $(event.currentTarget);
       router.navigate('');
       router.showContacts();
-    })
+    });
+
+    this.$el.on('click', '.addContact', function(event){
+      let $h3 = $(event.currentTarget);
+      router.navigate('AddContact');
+      router.showAddContact();
+    });
   },
 
 
@@ -60,6 +68,10 @@ let Router = Backbone.Router.extend({
     contact.fetch().then(function(){
       router.$el.html( contactTemplate( contact.toJSON() ));
     })
+  },
+
+  showAddContact: function(){
+    this.$el.html(AddContact);
   },
 
   start: function(){
