@@ -2035,10 +2035,14 @@ h3.Contacts {
   margin-left: auto;
   color: white;
   background-color: magenta;
-  border: 1px solid magenta;
+  border: 0 solid magenta;
   border-radius: 25px;
   width: 200px;
   cursor: pointer; }
+
+h3.Contacts:active {
+  background-color: white;
+  color: magenta; }
 
 h3.addContact {
   text-align: center;
@@ -2050,6 +2054,10 @@ h3.addContact {
   border-radius: 25px;
   width: 200px;
   cursor: pointer; }
+
+h3.addContact:active {
+  background-color: magenta;
+  color: white; }
 
 form {
   color: #444442; }
@@ -2079,6 +2087,9 @@ li {
   padding: 5px 0;
   margin: 5px 0;
   cursor: pointer; }
+
+li:active {
+  background-color: #A1E402; }
 
 ul {
   margin-left: 10%;

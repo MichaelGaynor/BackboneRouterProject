@@ -4,13 +4,13 @@ function AddContact(data){
   <h2>Enter Info</h2>
   <form>
   Name:<br>
-  <input type="text" name="Name">
+  <input type="text" class="Name">
   <br>Phone:<br>
-  <input type="text" name="Phone">
+  <input type="text" class="Phone">
   <br>Email:<br>
-  <input type="text" name="Email">
+  <input type="text" class="Email">
   <br>Location:<br>
-  <input type="text" name="Location">
+  <input type="text" class="Location">
   <br>
   </form>
   <h2>Do it, now</h2>
