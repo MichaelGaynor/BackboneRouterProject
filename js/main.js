@@ -12,6 +12,6 @@ var appElement = $('.app');
 var router = new Router(appElement);
 router.start();
 
-window.router = router;
+// window.router = router;
 
 console.log('Howdy, ya World you');

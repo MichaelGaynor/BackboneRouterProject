@@ -101,7 +101,7 @@ var appElement = (0, _jquery2['default'])('.app');
 var router = new _router2['default'](appElement);
 router.start();
 
-window.router = router;
+// window.router = router;
 
 console.log('Howdy, ya World you');
 

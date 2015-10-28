@@ -2037,7 +2037,8 @@ h3.Contacts {
   background-color: magenta;
   border: 1px solid magenta;
   border-radius: 25px;
-  width: 200px; }
+  width: 200px;
+  cursor: pointer; }
 
 h3.addContact {
   text-align: center;
@@ -2047,20 +2048,26 @@ h3.addContact {
   background-color: white;
   border: 0 solid magenta;
   border-radius: 25px;
-  width: 200px; }
+  width: 200px;
+  cursor: pointer; }
 
 form {
   color: #444442; }
 
 input {
   border-radius: 25px;
-  border: 1px solid magenta; }
+  border: 1px solid magenta;
+  outline: none; }
 
 .submit {
   color: white;
   background-color: magenta;
+  outline: none;
   border: none;
   border-radius: 25px; }
+
+button.submit:active {
+  background-color: #A1E402; }
 
 li {
   list-style-type: none;
@@ -2070,7 +2077,8 @@ li {
   background-color: magenta;
   color: white;
   padding: 5px 0;
-  margin: 5px 0; }
+  margin: 5px 0;
+  cursor: pointer; }
 
 ul {
   margin-left: 10%;

@@ -22,6 +22,7 @@ h3.Contacts{
   border: 1px solid magenta;
   border-radius: 25px;
   width: 200px;
+  cursor: pointer;
 }
 
 h3.addContact{
@@ -33,6 +34,7 @@ h3.addContact{
   border: 0 solid magenta;
   border-radius: 25px;
   width: 200px;
+  cursor: pointer;
 }
 
 form{
@@ -42,13 +44,19 @@ form{
 input{
   border-radius: 25px;
   border: 1px solid magenta;
+  outline: none;
 }
 
 .submit{
   color: white;
   background-color: magenta;
+  outline: none;
   border: none;
   border-radius: 25px;
+}
+
+button.submit:active{
+  background-color: #A1E402;
 }
 
 li{
@@ -60,6 +68,7 @@ li{
   color: white;
   padding: 5px 0;
   margin: 5px 0;
+  cursor: pointer;
 }
 
 ul{
