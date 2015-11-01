@@ -21,4 +21,5 @@ function AddContact(data){
   `
 }
 
+
 export default AddContact;

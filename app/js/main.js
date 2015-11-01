@@ -134,7 +134,7 @@ var _viewsContacts = require('./views/contacts');
 
 var _viewsContacts2 = _interopRequireDefault(_viewsContacts);
 
-var _viewsAddContact = require('./views/AddContact');
+var _viewsAddContact = require('./views/addContact');
 
 var _viewsAddContact2 = _interopRequireDefault(_viewsAddContact);
 
@@ -160,7 +160,6 @@ var Router = _backbone2['default'].Router.extend({
     this.$el.on('click', '.contactListItem', function (event) {
       var $li = (0, _jquery2['default'])(event.currentTarget);
       var contactId = $li.data('contact-id');
-      console.log('show contactID', contactId);
       router.navigate('contacts/' + contactId);
       router.showContact(contactId);
     });
@@ -187,10 +186,6 @@ var Router = _backbone2['default'].Router.extend({
   },
 
   showContact: function showContact(contactId) {
-    // this.contacts.fetch().then(function(){
-
-    //      this.$el.html(contactTemplate(this.contacts.toJSON()));
-    // }.bind(this));
 
     var contact = this.contacts.get(contactId);
 
@@ -202,7 +197,21 @@ var Router = _backbone2['default'].Router.extend({
   },
 
   showAddContact: function showAddContact() {
+    var _this = this;
+
     this.$el.html(_viewsAddContact2['default']);
+    (0, _jquery2['default'])('.submit').on('click', function (event) {
+      var newContact = {
+        Name: (0, _jquery2['default'])('input[class="Name"]').val(),
+        PhoneNumber: (0, _jquery2['default'])('input[class="Phone"]').val(),
+        Email: (0, _jquery2['default'])('input[class="Email"]').val(),
+        Location: (0, _jquery2['default'])('input[class="Location"]').val()
+      };
+      _this.contacts.create(newContact);
+      _this.navigate('');
+      _this.showContacts();
+      return false;
+    });
   },
 
   start: function start() {
@@ -214,7 +223,7 @@ var Router = _backbone2['default'].Router.extend({
 exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./ContactModel":1,"./ContactsCollection":2,"./views/AddContact":6,"./views/contact":7,"./views/contacts":8,"backbone":9,"jquery":10}],6:[function(require,module,exports){
+},{"./ContactModel":1,"./ContactsCollection":2,"./views/addContact":6,"./views/contact":7,"./views/contacts":8,"backbone":9,"jquery":10}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

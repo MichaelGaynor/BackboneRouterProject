@@ -5,7 +5,7 @@ import ContactsCollection from './ContactsCollection';
 
 import contactTemplate from './views/contact';
 import contactsTemplate from './views/contacts';
-import AddContact from './views/AddContact';
+import AddContact from './views/addContact';
 
 import ContactModel from './ContactModel';
 
@@ -27,7 +27,6 @@ let Router = Backbone.Router.extend({
     this.$el.on('click', '.contactListItem', function(event) {
       let $li = $(event.currentTarget);
       var contactId = $li.data('contact-id');
-      console.log('show contactID', contactId);
       router.navigate(`contacts/${contactId}`);
       router.showContact(contactId);
     });
@@ -55,12 +54,7 @@ let Router = Backbone.Router.extend({
   },
 
   showContact: function(contactId){
-   // this.contacts.fetch().then(function(){
-
-   //      this.$el.html(contactTemplate(this.contacts.toJSON()));
-   // }.bind(this));
-
-
+ 
     let contact = this.contacts.get(contactId);
 
     contact = this.contacts.add({objectId: contactId});
@@ -72,6 +66,18 @@ let Router = Backbone.Router.extend({
 
   showAddContact: function(){
     this.$el.html(AddContact);
+    $('.submit').on('click', (event) => {
+      let newContact ={
+        Name: $('input[class="Name"]').val(),
+        PhoneNumber: $('input[class="Phone"]').val(),
+        Email: $('input[class="Email"]').val(),
+        Location: $('input[class="Location"]').val()
+      };
+      this.contacts.create(newContact);
+      this.navigate('');
+      this.showContacts();
+      return false;
+    });
   },
 
   start: function(){
