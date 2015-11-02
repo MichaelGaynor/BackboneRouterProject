@@ -14,4 +14,4 @@ router.start();
 
 // window.router = router;
 
-console.log('Howdy, ya World you');
+console.log('Welcome to the page! Feel free to add a contact');
